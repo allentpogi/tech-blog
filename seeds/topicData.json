@@ -1,0 +1,22 @@
+[
+  {
+    "title": "HTML",
+    "content": "HTML is the standard markup language for Web pages. With HTML you can create your own Website. HTML is easy to learn - You will enjoy it!"
+  },
+  {
+    "title": "CSS",
+    "content": "CSS is the language we use to style an HTML document. CSS describes how HTML elements should be displayed. This tutorial will teach you CSS from basic to advanced."
+  },
+  {
+    "title": "Bootstrap",
+    "content": "Bootstrap is the world's most famous free CSS framework."
+  },
+  {
+    "title": "JSON",
+    "content": "JSON stands for JavaScript Object Notation. JSON is a text format for storing and transporting data. JSON is 'self-describing' and easy to understand"
+  },
+  {
+    "title": "JavaScript",
+    "content": "JavaScript is the world's most popular programming language. JavaScript is the programming language of the Web. JavaScript is easy to learn."
+  }
+]
