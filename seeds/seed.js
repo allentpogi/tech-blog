@@ -21,10 +21,12 @@ const seedDatabase = async () => {
   }
 
   for (const comment of commentData) {
+    const topicsData = await Topic.findAll({});
+    const topics = topicsData.map((topic) => topic.get({ plain: true }));
     await Comment.create({
       ...comment,
       user_id: users[Math.floor(Math.random() * users.length)].id,
-      topic_id: topic[Math.floor(Math.random() * topic.length)].id,
+      topic_id: topics[Math.floor(Math.random() * topics.length)].id,
     });
   }
 
