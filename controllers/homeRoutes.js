@@ -1,11 +1,13 @@
 const router = require('express').Router();
-const { Project, User } = require('../models');
+const { Topic, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
+  console.log('hitting homroute get all topics');
+
   try {
-    // Get all projects and JOIN with user data
-    const projectData = await Project.findAll({
+    // Get all topics and JOIN with user data
+    const topicData = await Topic.findAll({
       include: [
         {
           model: User,
@@ -14,22 +16,26 @@ router.get('/', async (req, res) => {
       ],
     });
 
+    console.log('loggedin user', req.session.logged_in);
+
     // Serialize data so the template can read it
-    const projects = projectData.map((project) => project.get({ plain: true }));
+    const topics = topicData.map((topic) => topic.get({ plain: true }));
+
+    console.log('topics from request', topics);
 
     // Pass serialized data and session flag into template
-    res.render('homepage', { 
-      projects, 
-      logged_in: req.session.logged_in 
+    res.render('homepage', {
+      topics,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/project/:id', async (req, res) => {
+router.get('/topic/:id', async (req, res) => {
   try {
-    const projectData = await Project.findByPk(req.params.id, {
+    const topicData = await Topic.findByPk(req.params.id, {
       include: [
         {
           model: User,
@@ -38,11 +44,11 @@ router.get('/project/:id', async (req, res) => {
       ],
     });
 
-    const project = projectData.get({ plain: true });
+    const topic = topicData.get({ plain: true });
 
-    res.render('project', {
-      ...project,
-      logged_in: req.session.logged_in
+    res.render('topic', {
+      ...topic,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -52,17 +58,18 @@ router.get('/project/:id', async (req, res) => {
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
+    console.log('hitting profile route');
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
+      include: [{ model: Topic }],
     });
 
     const user = userData.get({ plain: true });
 
     res.render('profile', {
       ...user,
-      logged_in: true
+      logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);

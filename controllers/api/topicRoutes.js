@@ -1,15 +1,16 @@
 const router = require('express').Router();
-const { Project } = require('../../models');
+const { Topic } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
+  console.log('hitting post api/topics');
   try {
-    const newProject = await Project.create({
+    const newTopic = await Topic.create({
       ...req.body,
       user_id: req.session.user_id,
     });
 
-    res.status(200).json(newProject);
+    res.status(200).json(newTopic);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -17,19 +18,19 @@ router.post('/', withAuth, async (req, res) => {
 
 router.delete('/:id', withAuth, async (req, res) => {
   try {
-    const projectData = await Project.destroy({
+    const topicData = await Topic.destroy({
       where: {
         id: req.params.id,
         user_id: req.session.user_id,
       },
     });
 
-    if (!projectData) {
-      res.status(404).json({ message: 'No project found with this id!' });
+    if (!topicData) {
+      res.status(404).json({ message: 'No topic found with this id!' });
       return;
     }
 
-    res.status(200).json(projectData);
+    res.status(200).json(topicData);
   } catch (err) {
     res.status(500).json(err);
   }
