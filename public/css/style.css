@@ -2,11 +2,6 @@ html * {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* .topic:not(:last-child) {
-  border-bottom: 1px solid #b6c3e7;
-  border-top: 1px;
-} */
-
 header {
 background-color: #e3fdff;
 margin: 0;
@@ -30,7 +25,7 @@ border-bottom: 1px solid #ccc;
 }
 
 
-button, .topic:hover {
+button {
   cursor: pointer;
 }
 
@@ -38,13 +33,15 @@ button, .topic:hover {
   background-color: #6bb0cf !important;
 }
 
-.topic {
+.topic, .topic-details {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 1em;
   background-color: #4bf7f7;
   border: 1px solid #b6c3e7;
 }
+
+
 
 
 a:hover {

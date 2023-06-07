@@ -34,6 +34,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/topic/:id', async (req, res) => {
+  console.log('hitting get topic by id');
   try {
     const topicData = await Topic.findByPk(req.params.id, {
       include: [
@@ -45,6 +46,8 @@ router.get('/topic/:id', async (req, res) => {
     });
 
     const topic = topicData.get({ plain: true });
+
+    console.log('topic', topic);
 
     res.render('topic', {
       ...topic,
