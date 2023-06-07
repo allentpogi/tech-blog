@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
           attributes: ['name'],
         },
       ],
+      order: [['date_created', 'DESC']],
     });
 
     console.log('loggedin user', req.session.logged_in);
@@ -66,6 +67,7 @@ router.get('/profile', withAuth, async (req, res) => {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Topic }],
+      order: [[{ model: Topic }, 'date_created', 'DESC']],
     });
 
     const user = userData.get({ plain: true });
