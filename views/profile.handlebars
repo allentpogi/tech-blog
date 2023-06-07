@@ -6,15 +6,15 @@
 
 <div class="row mt-4">
   <div class="col-md-6">
-    <h3>Create a New Topic:</h3>
+    <h3>Create a new topic:</h3>
 
     <form class="form new-topic-form">
       <div class="form-group">
-        <label for="topic-name">topic title:</label>
+        <label for="topic-name">Topic title:</label>
         <input class="form-input" type="text" id="topic-name" name="topic-name" />
       </div>
       <div class="form-group">
-        <label for="topic-desc">topic description:</label>
+        <label for="topic-desc">Topic description:</label>
         <textarea class="form-input" id="topic-desc" name="topic-desc"></textarea>
       </div>
       <div class="form-group">
@@ -22,10 +22,9 @@
       </div>
     </form>
   </div>
-
   {{#if topics.length}}
   <div class="col-md-6 topic-list">
-    <h3>Current Topics:</h3>
+    <h3>Current topics:</h3>
 
     {{#each topics as |topic|}}
     <div class="row mb-2">
@@ -33,7 +32,7 @@
         <h4><a href="/topic/{{topic.id}}">{{topic.title}}</a></h4>
       </div>
       <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{topic.id}}">DELETE</button>
+        <button class="btn btn-sm btn-danger" data-id="{{topic.id}}">Delete</button>
       </div>
     </div>
     {{/each}}

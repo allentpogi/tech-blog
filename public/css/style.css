@@ -97,14 +97,15 @@ footer {
   background-color:#243341!important
 }
 
-.col-md-6 {
+.col-md-6, .topic-list, .new-topic-form {
+  width: 80%;
   background-color: #81ffff;
 }
 
-.new-topic-form {
-  width: 80%;
+.topic-list {
+  border-left: 1px solid #ccc !important;
 }
 
-.topic-list {
-  width: 80%;
+.mt-4 {
+  border: 1px solid #b6c3e7 !important;
 }
