@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Topic } = require('../../models');
+const { Comment, Topic } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
@@ -11,6 +11,20 @@ router.post('/', withAuth, async (req, res) => {
     });
 
     res.status(200).json(newTopic);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.post('/comment', withAuth, async (req, res) => {
+  console.log('hitting post api/topics/comment');
+  try {
+    const newComment = await Comment.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+
+    res.status(200).json(newComment);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -36,4 +50,15 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
+router.get('/create', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.render('createtopic', {
+      logged_in: true,
+    });
+    return;
+  }
+
+  res.render('login');
+});
 module.exports = router;

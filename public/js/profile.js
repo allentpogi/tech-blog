@@ -1,4 +1,4 @@
-const newFormHandler = async (event) => {
+const newTopichandler = async (event) => {
   event.preventDefault();
 
   const title = document.querySelector('#topic-name').value.trim();
@@ -40,10 +40,23 @@ const delButtonHandler = async (event) => {
   }
 };
 
-document
-  .querySelector('.new-topic-form')
-  .addEventListener('submit', newFormHandler);
+// const editButtonHandler = async (event) => {
+//   console.log('edit is pressed');
+//   const topicName = document.querySelector('#topic-name');
+//   const topicDesc = document.querySelector('#topic-desc');
+
+//   topicName.value =
+
+// };
 
 document
-  .querySelector('.topic-list')
+  .querySelector('.create-topic')
+  .addEventListener('click', newTopichandler);
+
+document
+  .querySelector('.delete-topic')
   .addEventListener('click', delButtonHandler);
+
+document
+  .querySelector('.edit-topic')
+  .addEventListener('click', editButtonHandler);

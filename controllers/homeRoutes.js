@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { Topic, User } = require('../models');
+const { Comment, Topic, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
-  console.log('hitting homroute get all topics');
+  console.log('hitting homeroute get all topics');
 
   try {
     // Get all topics and JOIN with user data
@@ -42,6 +42,12 @@ router.get('/topic/:id', async (req, res) => {
         {
           model: User,
           attributes: ['name'],
+        },
+        {
+          model: Comment,
+          attributes: ['comment', 'date_created'],
+          include: [User],
+          order: [['date_created', 'DESC']],
         },
       ],
     });
