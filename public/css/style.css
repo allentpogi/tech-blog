@@ -33,7 +33,7 @@ button {
   background-color: #6bb0cf !important;
 }
 
-.topic, .topic-details {
+.topic, .topic-details, .new-topic-form, .topic-list {
   margin: 0;
   padding: 1em;
   background-color: #4bf7f7;
@@ -112,13 +112,10 @@ footer {
 }
 
 .col-md-6, .topic-list, .new-topic-form {
-  width: 80%;
+  width: 100%;
   background-color: #81ffff;
 }
 
-.topic-list {
-  border-left: 1px solid #ccc !important;
-}
 
 .mt-4 {
   border: 1px solid #b6c3e7 !important;

@@ -61,4 +61,40 @@ router.get('/create', (req, res) => {
 
   res.render('login');
 });
+
+router.get('/edit/:id', withAuth, async (req, res) => {
+  try {
+    const topicData = await Topic.findByPk(req.params.id, {});
+    const topic = topicData.get({ plain: true });
+
+    res.render('edittopic', {
+      ...topic,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const topicData = await Topic.update(
+      {
+        ...req.body,
+        user_id: req.session.user_id,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    res.status(200).json({ message: 'Topic updated successfully' });
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+});
+
 module.exports = router;

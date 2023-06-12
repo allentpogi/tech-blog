@@ -1,0 +1,21 @@
+<div class="col-md-9">
+  <h3>Edit topic:</h3>
+
+  <form class="form new-topic-form">
+    <div class="form-group">
+      <label for="topic-name">Topic title:</label>
+      <input class="form-input" type="text" id="topic-name" name="topic-name" value = "{{title}}"/>
+    </div>
+    <div class="form-group">
+      <label for="topic-desc">Topic description:</label>
+      <textarea class="form-input" id="topic-desc" name="topic-desc">{{content}}</textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary cancel-update">Cancel</button>
+      <button type="submit" class="btn btn-primary update-topic">Save</button>
+    </div>
+    <br>
+  </form>
+</div>
+
+<script src="../../../js/edittopic.js"></script>

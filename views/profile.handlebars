@@ -7,15 +7,15 @@
 
 
 {{#if topics.length}}
-<div class="col-md-8 topic-list">
+<div class="col-md-9 topic-list">
   <h3>Current topics:</h3>
 
   {{#each topics as |topic|}}
   <div class="row mb-4">
-    <div class="col-md-5">
+    <div class="col-md-9">
       <p class="topic-header"><a href="/topic/{{topic.id}}">{{topic.title}}</a>
     </div>
-    <div class="col-md-1">
+    <div class="col-md-3">
       <button class="btn btn-sm btn-danger edit-topic" data-id="{{topic.id}}">Edit</button>
       <button class="btn btn-sm btn-danger delete-topic" data-id="{{topic.id}}">Delete</button>
     </div>
@@ -23,8 +23,12 @@
   </div>
   {{/each}}
 </div>
+{{else}}
+<div class="col-md-9 topic-list">
+<p>No topics available. Create your first topic.</p>
+</div>
 {{/if}}
-
-<a href="api/topics/create">Create</a>
+<br>
+<button type="submit" class="btn btn-primary create-topic">Create topic</button>
 
 <script src="./js/profile.js"></script>
