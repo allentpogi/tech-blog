@@ -25,7 +25,7 @@ Run the index.js under the seeds folder to create the tables and seed the tables
 Then run "npm start" to run the application.
 
 ## Usage
-This program is deployed on heroku and can be accessed using this URL:
+This program is deployed on heroku and can be accessed using this URL: https://allenpogi-tech-blog.herokuapp.com/
 
 ## Screenshot
 
