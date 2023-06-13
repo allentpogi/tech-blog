@@ -1,3 +1,4 @@
+//routine that handles form submission for updating a topic
 const updateTopichandler = async (event) => {
   event.preventDefault();
 
@@ -5,9 +6,6 @@ const updateTopichandler = async (event) => {
   const content = document.querySelector('#topic-desc').value.trim();
   const str = window.location.href;
   const id = str.slice(str.lastIndexOf('/') + 1);
-
-  console.log('topic name', title);
-  console.log('topic desc', content);
 
   if (title && content) {
     const response = await fetch(`/api/topics/` + id, {
@@ -26,6 +24,7 @@ const updateTopichandler = async (event) => {
   }
 };
 
+//routine that handles navigation back to profile page on cancel
 const backToprofile = async (event) => {
   event.preventDefault();
   document.location.replace('/profile');

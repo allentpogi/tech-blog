@@ -2,8 +2,8 @@ const router = require('express').Router();
 const { Comment, Topic } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+//route to create a new topic
 router.post('/', withAuth, async (req, res) => {
-  console.log('hitting post api/topics');
   try {
     const newTopic = await Topic.create({
       ...req.body,
@@ -16,8 +16,8 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+//route to create a new comment
 router.post('/comment', withAuth, async (req, res) => {
-  console.log('hitting post api/topics/comment');
   try {
     const newComment = await Comment.create({
       ...req.body,
@@ -30,6 +30,7 @@ router.post('/comment', withAuth, async (req, res) => {
   }
 });
 
+//route to delete a topic
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const topicData = await Topic.destroy({
@@ -50,18 +51,19 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
+//route to redirect the user to the create topic page
 router.get('/create', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
+  // If the user is already logged in, redirect the request to the login page
   if (req.session.logged_in) {
     res.render('createtopic', {
       logged_in: true,
     });
     return;
   }
-
   res.render('login');
 });
 
+//route to redirect the user to the edit topic page with the topic title and description populated
 router.get('/edit/:id', withAuth, async (req, res) => {
   try {
     const topicData = await Topic.findByPk(req.params.id, {});
@@ -76,6 +78,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
   }
 });
 
+//route to update a topic
 router.put('/:id', withAuth, async (req, res) => {
   try {
     const topicData = await Topic.update(
@@ -93,7 +96,6 @@ router.put('/:id', withAuth, async (req, res) => {
     res.status(200).json({ message: 'Topic updated successfully' });
   } catch (err) {
     res.status(500).json(err);
-    console.log(err);
   }
 });
 

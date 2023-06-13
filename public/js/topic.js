@@ -1,10 +1,8 @@
+//function to handle the posting of new comment
 const newCommenthandler = async (event) => {
   event.preventDefault();
-  console.log('creating new comment');
 
   const comment = document.querySelector('#comment').value.trim();
-
-  console.log('comment', comment);
 
   const str = window.location.href;
   const topic_id = str.slice(str.lastIndexOf('/') + 1);

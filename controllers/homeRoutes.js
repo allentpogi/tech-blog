@@ -2,9 +2,8 @@ const router = require('express').Router();
 const { Comment, Topic, User } = require('../models');
 const withAuth = require('../utils/auth');
 
+//route to get all topics
 router.get('/', async (req, res) => {
-  console.log('hitting homeroute get all topics');
-
   try {
     // Get all topics and JOIN with user data
     const topicData = await Topic.findAll({
@@ -17,12 +16,8 @@ router.get('/', async (req, res) => {
       order: [['date_created', 'DESC']],
     });
 
-    console.log('loggedin user', req.session.logged_in);
-
     // Serialize data so the template can read it
     const topics = topicData.map((topic) => topic.get({ plain: true }));
-
-    console.log('topics from request', topics);
 
     // Pass serialized data and session flag into template
     res.render('homepage', {
@@ -34,8 +29,8 @@ router.get('/', async (req, res) => {
   }
 });
 
+//route to get a specific topic using the topic id
 router.get('/topic/:id', async (req, res) => {
-  console.log('hitting get topic by id');
   try {
     const topicData = await Topic.findByPk(req.params.id, {
       include: [
@@ -54,8 +49,6 @@ router.get('/topic/:id', async (req, res) => {
 
     const topic = topicData.get({ plain: true });
 
-    console.log('topic', topic);
-
     res.render('topic', {
       ...topic,
       logged_in: req.session.logged_in,
@@ -65,10 +58,9 @@ router.get('/topic/:id', async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
+//route to display the user profile/dashboard and the list the topics created by the user
 router.get('/profile', withAuth, async (req, res) => {
   try {
-    console.log('hitting profile route');
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
@@ -87,8 +79,8 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
+//route to display the login page
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/profile');
     return;

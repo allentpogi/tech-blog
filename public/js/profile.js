@@ -1,3 +1,4 @@
+//routine that routes the user to the respective screens depending on the button clicked
 const formHandler = async (event) => {
   if (event.target.classList.contains('edit-topic')) {
     editButtonHandler(event);
@@ -6,6 +7,7 @@ const formHandler = async (event) => {
   }
 };
 
+//function for deleting a topic
 const delButtonHandler = async (event) => {
   event.preventDefault();
   if (event.target.hasAttribute('data-id')) {
@@ -23,10 +25,12 @@ const delButtonHandler = async (event) => {
   }
 };
 
+//function for redirecting user to the create topic page on click of the button
 const createHandler = async (event) => {
   document.location.replace('/api/topics/create');
 };
 
+//function for editing a topic
 const editButtonHandler = async (event) => {
   event.preventDefault();
   console.log('edit is pressed');
